@@ -25,7 +25,11 @@ function getMagnets(arguments) {
     return magnetlist;
 }
 
-// 将结果输出为txt
+/**
+ * 将结果输出为txt
+ * @param {Array} magnets
+ * @param {String} path
+ */
 function outMagnets(magnets, path) {
     if (magnets.length > 0) {
         var writebuffer = Buffer.from(arrayToString(magnets, '\n'));
