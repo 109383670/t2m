@@ -3,7 +3,7 @@ var bencode = require('bencode');
 var sha1 = require('js-sha1');
 var arguments = process.argv.splice(2); //获取命令行参数，第三个元素是带的参数
 
-outMagnets(getMagnets(arguments));
+outMagnets(getMagnets(arguments), arguments);
 
 // 获取磁链链接，arguments为文件夹路径
 function getMagnets(arguments) {
@@ -26,10 +26,11 @@ function getMagnets(arguments) {
 }
 
 // 将结果输出为txt
-function outMagnets(magnets) {
+function outMagnets(magnets, path) {
     if (magnets.length > 0) {
         var writebuffer = Buffer.from(arrayToString(magnets, '\n'));
-        var writesteam = fs.createWriteStream('magnets.txt');
+        var savepath = path.toString() + '/' + "magnets.txt";
+        var writesteam = fs.createWriteStream(savepath);
         writesteam.write(writebuffer, 'utf-8');
         writesteam.end();
         writesteam.on('finish', function () {
